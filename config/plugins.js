@@ -1,4 +1,11 @@
 module.exports = ({ env }) => ({
+  i18n: {
+    enabled: true,
+    config: {
+      defaultLocale: 'en',
+      locales: ['en', 'fr', 'es'], // Add your supported locales here
+    },
+  },
   'users-permissions': {
     config: {
       jwtSecret: env('JWT_SECRET'),
