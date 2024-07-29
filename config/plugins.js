@@ -3,7 +3,7 @@ module.exports = ({ env }) => ({
     enabled: true,
     config: {
       defaultLocale: 'en',
-      locales: ['en', 'fr', 'es'], // Add your supported locales here
+      locales: ['en', 'ro'], // Add your supported locales here
     },
   },
   'users-permissions': {
