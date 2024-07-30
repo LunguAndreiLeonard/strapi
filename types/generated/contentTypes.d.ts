@@ -905,15 +905,41 @@ export interface ApiLawyerLawyer extends Schema.CollectionType {
     singularName: 'lawyer';
     pluralName: 'lawyers';
     displayName: 'lawyer';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    name: Attribute.String;
-    function: Attribute.String;
-    content: Attribute.Text;
-    profile: Attribute.Media;
+    name: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    function: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    content: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    profile: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     slug: Attribute.UID<'api::lawyer.lawyer', 'name'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -930,6 +956,12 @@ export interface ApiLawyerLawyer extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::lawyer.lawyer',
+      'oneToMany',
+      'api::lawyer.lawyer'
+    >;
+    locale: Attribute.String;
   };
 }
 
