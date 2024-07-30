@@ -899,6 +899,40 @@ export interface ApiBlogTeodosiuBlogTeodosiu extends Schema.CollectionType {
   };
 }
 
+export interface ApiLawyerLawyer extends Schema.CollectionType {
+  collectionName: 'lawyers';
+  info: {
+    singularName: 'lawyer';
+    pluralName: 'lawyers';
+    displayName: 'lawyer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    function: Attribute.String;
+    content: Attribute.Text;
+    profile: Attribute.Media;
+    slug: Attribute.UID<'api::lawyer.lawyer', 'name'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::lawyer.lawyer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::lawyer.lawyer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiTeodosiuLawyerTeodosiuLawyer extends Schema.CollectionType {
   collectionName: 'teodosiu_lawyers';
   info: {
@@ -953,6 +987,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::blog.blog': ApiBlogBlog;
       'api::blog-teodosiu.blog-teodosiu': ApiBlogTeodosiuBlogTeodosiu;
+      'api::lawyer.lawyer': ApiLawyerLawyer;
       'api::teodosiu-lawyer.teodosiu-lawyer': ApiTeodosiuLawyerTeodosiuLawyer;
     }
   }
